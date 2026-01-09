@@ -1,0 +1,73 @@
+2026-01-01 12:26:50,153 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-01 12:26:50,163 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-01 12:26:50,164 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-01 12:27:35,723 - __main__ - ERROR -  Failed to start DSA Tutor: (ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: fade0417-04a3-4019-8995-4d630809b457)')
+2026-01-01 12:51:11,869 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-01 12:51:11,891 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-01 12:51:11,893 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-01 12:51:21,534 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-01 12:51:21,798 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-01 12:51:29,655 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-01 12:51:29,657 - __main__ - INFO -  Creating web interface...
+2026-01-01 12:51:30,960 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-01 12:51:30,961 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-01 13:40:00,520 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-01 13:40:00,533 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-01 13:40:00,533 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-01 13:40:03,520 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-01 13:40:03,776 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-01 13:40:07,406 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-01 13:40:07,407 - __main__ - INFO -  Creating web interface...
+2026-01-01 13:40:07,979 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-01 13:40:07,980 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-01 13:41:56,659 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-01 13:41:56,673 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-01 13:41:56,673 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-01 13:42:01,360 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-01 13:42:01,410 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-01 13:42:03,834 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-01 13:42:03,834 - __main__ - INFO -  Creating web interface...
+2026-01-01 13:42:04,289 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-01 13:42:04,289 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-01 13:48:15,528 - root - ERROR - Error starting session: 'Textbox' object has no attribute 'update'
+2026-01-01 13:50:37,014 - root - ERROR - Error starting session: 'Textbox' object has no attribute 'update'
+2026-01-01 13:54:24,421 - root - ERROR - Error starting session: 'Textbox' object has no attribute 'update'
+2026-01-01 13:54:28,799 - root - ERROR - Error explaining concept: 'Textbox' object has no attribute 'update'
+2026-01-01 17:54:33,656 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-01 17:54:33,670 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-01 17:54:33,671 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-01 17:54:36,215 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-01 17:54:36,426 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-01 17:54:38,923 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-01 17:54:38,924 - __main__ - INFO -  Creating web interface...
+2026-01-01 17:54:39,392 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-01 17:54:39,392 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-01 17:56:40,674 - root - ERROR - Error generating problem: 'UUID' object is not subscriptable
+2026-01-01 18:04:51,129 - root - ERROR - Error generating problem: 'UUID' object is not subscriptable
+2026-01-01 18:18:56,122 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-01 18:18:56,129 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-01 18:18:56,130 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-01 18:18:58,178 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-01 18:18:58,374 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-01 18:19:00,684 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-01 18:19:00,685 - __main__ - INFO -  Creating web interface...
+2026-01-01 18:19:01,123 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-01 18:19:01,124 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-03 13:51:36,914 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-03 13:51:36,928 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-03 13:51:36,928 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-03 13:51:43,161 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-03 13:51:43,496 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-03 13:51:50,989 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-03 13:51:50,992 - __main__ - INFO -  Creating web interface...
+2026-01-03 13:51:52,284 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-03 13:51:52,286 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-08 21:13:20,490 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-08 21:13:20,507 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-08 21:13:20,508 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-08 21:13:24,874 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-08 21:13:25,112 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-08 21:13:28,602 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-08 21:13:28,602 - __main__ - INFO -  Creating web interface...
+2026-01-08 21:13:29,082 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-08 21:13:29,083 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860

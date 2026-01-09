@@ -1,0 +1,29 @@
+
+langchain
+langchain-community
+langchain-core
+langchain-groq
+groq
+
+gradio
+faiss-cpu
+chromadb
+
+pydantic
+python-Levenshtein
+numpy
+
+# # langchain
+# # langchain-groq
+# # langchain-openai
+# # langchain-community
+# # faiss-cpu
+# # gradio
+# # pydantic
+# # python-dotenv
+# # tiktoken
+# # chromadb
+# # plotly
+# # networkx
+# # matplotlib
+# # python-Levenshtein
