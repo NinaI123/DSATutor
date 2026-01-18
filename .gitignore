@@ -1,1 +1,7 @@
 .env
+OUTPUT_ISSUES_ANALYSIS.md
+FIXES_APPLIED.md
+systemExp.txt
+notes.txt
+SYSTEM_EXPLANATION.md
+main_broken.py
