@@ -66,10 +66,45 @@ class DSAKnowledgeBase:
     
     def __init__(self):
         self.documents = self._load_dsa_documents()
-        self.embeddings = HuggingFaceEmbeddings(
-            model_name="sentence-transformers/all-MiniLM-L6-v2"
-        )
-        self.vector_store = self._create_vector_store()
+        # Lazy load embeddings to avoid slow startup
+        self._embeddings = None
+        self.vector_store = self._load_or_create_vector_store()
+    
+    @property
+    def embeddings(self):
+        """Lazy load embeddings only when needed"""
+        if self._embeddings is None:
+            print("Loading embeddings model...")
+            self._embeddings = HuggingFaceEmbeddings(
+                model_name="sentence-transformers/all-MiniLM-L6-v2"
+            )
+        return self._embeddings
+    
+    def _load_or_create_vector_store(self):
+        """Load existing vector store or create new one"""
+        import os
+        faiss_path = "faiss_index"
+        
+        # Try to load existing index
+        if os.path.exists(faiss_path):
+            try:
+                print(f"Loading existing FAISS index from {faiss_path}...")
+                return FAISS.load_local(faiss_path, self.embeddings, allow_dangerous_deserialization=True)
+            except Exception as e:
+                print(f"Failed to load FAISS index: {e}, creating new one...")
+        
+        # Create new vector store
+        print("Creating new FAISS vector store...")
+        vector_store = self._create_vector_store()
+        
+        # Save it for future use
+        try:
+            print(f"Saving FAISS index to {faiss_path}...")
+            vector_store.save_local(faiss_path)
+        except Exception as e:
+            print(f"Failed to save FAISS index: {e}")
+        
+        return vector_store
         
     def _load_dsa_documents(self) -> List[Document]:
         """Load comprehensive DSA knowledge"""

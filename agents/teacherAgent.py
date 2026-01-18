@@ -1,17 +1,26 @@
 # AGENT 1: TEACHER AGENT
 import uuid
-from knowledge_base import DSAKnowledgeBase, Topic, Difficulty
+# Defer knowledge_base import to avoid slow transformers loading
+# from knowledge_base import DSAKnowledgeBase, Topic, Difficulty
 from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from datetime import datetime
 from typing import Dict, List
 import json
+from utils.json_parser import extract_json
+
+# Define Difficulty enum locally to avoid import issues
+from enum import Enum
+class Difficulty(Enum):
+    EASY = "Easy"
+    MEDIUM = "Medium" 
+    HARD = "Hard"
 class TeacherAgent:
     """Main teaching agent that orchestrates learning sessions"""
     
-    def __init__(self, knowledge_base: DSAKnowledgeBase):
+    def __init__(self, knowledge_base=None):
         self.kb = knowledge_base
-        self.llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.7)
+        self.llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.4)
         self.student_progress = {}  # student_id --> progress = tracking progress with the help of the student ID
         self.current_session = None
         
@@ -32,6 +41,9 @@ class TeacherAgent:
         
         # Initialize student progress if needed
         if student_id not in self.student_progress:
+            # Import Topic locally to avoid circular/heavy imports
+            from knowledge_base import Topic
+            
             self.student_progress[student_id] = {
                 "total_sessions": 0,
                 "topics_mastery": {topic.value: 0.0 for topic in Topic},
@@ -46,56 +58,79 @@ class TeacherAgent:
         
         return {
             "session_id": session_id,
-            "welcome_message": self._generate_welcome_message(topics),
+            "welcome_message": self._generate_welcome_message(topics, self.student_progress[student_id]),
             "learning_plan": learning_plan,
             "first_concept": learning_plan[0] if learning_plan else None
         }
     
     def _generate_learning_plan(self, topics: List[str], difficulty: Difficulty) -> List[Dict]:
-        """Generate personalized learning plan"""
-        plan = []
-        
-        for topic in topics:
-            # Get topic introduction
-            docs = self.kb.query(f"Introduction to {topic}", topic)
-            concept_doc = next((d for d in docs if d.metadata.get("type") == "concept"), None)
+        """Generate personalized 5-phase learning plan"""
+        if self.kb is None:
+            raise ValueError("Knowledge base not available. Please initialize the system first.")
             
-            if concept_doc:
-                plan.append({
-                    "type": "concept",
-                    "topic": topic,
-                    "content": concept_doc.page_content[:500] + "...",
-                    "difficulty": difficulty.value
-                })
-            
-            # Get practice problem
-            docs = self.kb.query(f"{difficulty.value} problem about {topic}", topic)
-            problem_docs = [d for d in docs if d.metadata.get("type") == "problem"]
-            
-            if problem_docs:
-                problem_doc = problem_docs[0]
-                plan.append({
-                    "type": "problem",
-                    "topic": topic,
-                    "problem_id": problem_doc.metadata.get("problem_id"),
-                    "difficulty": difficulty.value
-                })
-        
-        return plan
-    
-    def _generate_welcome_message(self, topics: List[str]) -> str:
-        """Generate personalized welcome message"""
         topics_str = ", ".join(topics)
+        
         prompt = f"""
-        You are an expert DSA tutor. A student wants to learn about: {topics_str}.
+        Create a flexible 5-phase learning plan for a student learning: {topics_str}.
+        Difficulty Level: {difficulty.value}
         
-        Generate a warm, encouraging welcome message that:
-        1. Welcomes them to the learning session
-        2. Briefly explains what they'll learn
-        3. Sets expectations for the session
-        4. Encourages them to ask questions
+        Structure the plan into these 5 phases:
+        1. Warmup / Prior Knowledge Check
+        2. Concept Exploration (Core theory)
+        3. Guided Practice (Walkthroughs)
+        4. Independent Practice (Challenge)
+        5. Reflection & Next Steps
         
-        Keep it friendly but professional, 2-3 paragraphs.
+        For each phase, provide:
+        - Phase Name
+        - Specific Topic (from the user's list)
+        - Activity Type (concept, problem, question, reflection)
+        - Brief Description (1 sentence)
+        - Estimated Time
+        
+        IMPORTANT: Return ONLY valid JSON array.
+        Format: [
+            {{"phase": "Warmup", "topic": "...", "type": "question", "description": "...", "estimated_time": "5 mins"}},
+            ...
+        ]
+        """
+        
+        response = self.llm.invoke([HumanMessage(content=prompt)])
+        
+        try:
+            # Use robust extractor
+            plan = extract_json(response.content)
+            return plan
+        except Exception as e:
+            # Fallback simple plan if JSON fails
+            return [
+                {"phase": "Warmup", "topic": topics[0], "type": "concept", "description": "Quick review of basic concepts", "estimated_time": "5 mins"},
+                {"phase": "Concept", "topic": topics[0], "type": "concept", "description": "Deep dive into core theory", "estimated_time": "15 mins"},
+                {"phase": "Practice", "topic": topics[0], "type": "problem", "description": "Solve a practice problem", "estimated_time": "20 mins"}
+            ]
+
+    def _generate_welcome_message(self, topics: List[str], student_progress: Dict) -> str:
+        """Generate highly personalized welcome message"""
+        topics_str = ", ".join(topics)
+        total_sessions = student_progress.get("total_sessions", 1)
+        weak_areas = ", ".join(student_progress.get("weak_areas", []))
+        
+        context = f"This is session #{total_sessions}."
+        if weak_areas:
+            context += f" Focus on improving: {weak_areas}."
+            
+        prompt = f"""
+        You are an AI DSA Tutor welcoming a student.
+        Topics: {topics_str}
+        Student Context: {context}
+        
+        Write a personalized welcome message (2-3 paragraphs) that:
+        1. Welcomes them back (or first time) warm and professionally.
+        2. Acknowledges their specific topics and context.
+        3. Explains the session flow: Warmup -> Concept -> Guided -> Independent -> Reflection.
+        4. Encourages questions: "I adapt to you. If you're stuck, just ask!"
+        
+        Tone: Encouraging, structured, reliable.
         """
         
         response = self.llm.invoke([HumanMessage(content=prompt)])
@@ -104,6 +139,9 @@ class TeacherAgent:
     def explain_concept(self, concept: str, topic: str, 
                        student_level: str = "beginner") -> Dict:
         """Explain a DSA concept at appropriate level"""
+        if self.kb is None:
+            raise ValueError("Knowledge base not available. Please initialize the system first.")
+            
         # Retrieve relevant knowledge
         docs = self.kb.query(f"Explain {concept} in {topic}", topic)
         
@@ -176,6 +214,9 @@ class TeacherAgent:
     
     def _get_related_concepts(self, topic: str, concept: str) -> List[str]:
         """Get related concepts for deeper learning"""
+        if self.kb is None:
+            return []  # Return empty list if kb not available
+            
         docs = self.kb.query(f"Concepts related to {concept} in {topic}", topic)
         
         prompt = f"""

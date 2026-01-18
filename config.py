@@ -31,8 +31,8 @@ APP_VERSION = "1.0.0"
 DEBUG_MODE = True
 
 # Server configuration
-SERVER_HOST = "0.0.0.0"  # For local access use "127.0.0.1"
-SERVER_PORT = 7860
+SERVER_HOST = os.getenv("GRADIO_SERVER_NAME", "0.0.0.0")  # For local access use "127.0.0.1"
+SERVER_PORT = int(os.getenv("GRADIO_SERVER_PORT", "7861"))
 SHARE_PUBLICLY = False  # Set to True for temporary public link
 
 # ==================== KNOWLEDGE BASE CONFIG ====================

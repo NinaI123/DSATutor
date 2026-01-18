@@ -75,8 +75,35 @@ def _fix_common_json_issues(text: str) -> str:
     # Remove trailing commas before closing braces/brackets
     text = re.sub(r',(\s*[}\]])', r'\1', text)
     
-    # Fix missing commas between array/object elements
-    # This is tricky and might break valid JSON, so be conservative
+    # Fix unescaped newlines inside strings (common LLM error)
+    # This regex looks for newlines that are NOT followed by a quote or whitespace-quote (heuristic)
+    # A better approach is to handle specific known control chars that break JSON
+    
+    # Replace actual newlines with escaped newlines
+    # But be careful not to replace newlines outside strings if they are formatting
+    # Simple brute force: replace all control chars with spaces or escapes if they are inside quotes?
+    # Hard to do with regex alone.
+    
+    # Heuristic: Replace newlines with \n if they seem to be in a string (between quotes)
+    # For now, let's just make sure we don't have literal control chars
+    
+    def replace_newlines(match):
+        return match.group(0).replace('\n', '\\n').replace('\r', '')
+        
+    # Attempt to sanitize strings: escape newlines inside double quotes
+    # This is complex, but often the issue is just simple multiline strings
+    
+    # Simply escaping all newlines in the text might break formatting, but valid JSON shouldn't have newlines
+    # except as whitespace. 
+    # If the LLM returned "formatted" JSON with indentation, those newlines are fine.
+    # The error "Invalid control character" specifically means a literal control char INSIDE a string.
+    
+    # Standard cleanup: invalid control characters (0-31) except tab, newline, return
+    # But JSON requires newline in string to be escaped.
+    
+    # Let's try flexible loading using regex to strip bad chars if needed
+    # Or, specifically target the "Invalid control character" error by escaping unescaped newlines
+    # that appear to be inside values.
     
     return text
 

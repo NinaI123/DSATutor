@@ -71,3 +71,417 @@
 2026-01-08 21:13:28,602 - __main__ - INFO -  Creating web interface...
 2026-01-08 21:13:29,082 - __main__ - INFO -  DSA Tutor AI is ready!
 2026-01-08 21:13:29,083 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-08 22:41:41,301 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-08 22:41:41,308 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-08 22:41:41,308 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-08 22:41:43,681 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-08 22:41:43,805 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-08 22:41:45,780 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-08 22:41:45,780 - __main__ - INFO -  Creating web interface...
+2026-01-08 22:41:46,179 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-08 22:41:46,179 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-14 12:27:15,395 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-14 12:27:15,403 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 12:27:15,403 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 12:27:18,638 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 12:27:18,809 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 12:27:21,330 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-14 12:27:21,331 - __main__ - INFO -  Creating web interface...
+2026-01-14 12:27:21,774 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-14 12:27:21,774 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-14 14:08:53,538 - utils.json_parser - ERROR - Failed to parse JSON. Original response:
+```json
+{
+  "title": "Course Schedule with Time Limit",
+  "description": "Given a set of courses and their prerequisites, determine if it's possible to finish all courses within a given time limit. Each course has a duration and a prerequisite course. If a course has a prerequisite, it must be compl
+2026-01-14 14:08:53,549 - utils.json_parser - ERROR - Cleaned text:
+{
+  "title": "Course Schedule with Time Limit",
+  "description": "Given a set of courses and their prerequisites, determine if it's possible to finish all courses within a given time limit. Each course has a duration and a prerequisite course. If a course has a prerequisite, it must be completed bef
+2026-01-14 14:08:53,549 - utils.json_parser - ERROR - JSON Error: Extra data: line 121 column 1 (char 3511)
+2026-01-14 14:08:53,552 - agents.QGenAgent - ERROR - Failed to parse problem generation response: Extra data: line 121 column 1 (char 3511)
+2026-01-14 14:09:58,116 - utils.json_parser - ERROR - Failed to parse JSON. Original response:
+```json
+{
+  "title": "Course Schedule with Time Limit",
+  "description": "Given a set of courses and their prerequisites, determine if it's possible to finish all courses within a given time limit. Each course has a duration and a prerequisite course. If a course has a prerequisite, it must be compl
+2026-01-14 14:09:58,118 - utils.json_parser - ERROR - Cleaned text:
+{
+  "title": "Course Schedule with Time Limit",
+  "description": "Given a set of courses and their prerequisites, determine if it's possible to finish all courses within a given time limit. Each course has a duration and a prerequisite course. If a course has a prerequisite, it must be completed bef
+2026-01-14 14:09:58,119 - utils.json_parser - ERROR - JSON Error: Expecting ',' delimiter: line 84 column 21 (char 2022)
+2026-01-14 14:09:58,120 - agents.EvalAgent - ERROR - Failed to parse test results: Expecting ',' delimiter: line 84 column 21 (char 2022)
+2026-01-14 14:09:59,044 - utils.json_parser - ERROR - Failed to parse JSON. Original response:
+```json
+{
+  "positives": [
+    "You're taking the first step towards solving the problem by acknowledging your uncertainty and seeking help.",
+    "You're open to learning and willing to break down the problem into smaller subproblems, which is a great approach."
+  ],
+  "improvements_needed": [
+    
+2026-01-14 14:09:59,045 - utils.json_parser - ERROR - Cleaned text:
+{
+  "positives": [
+    "You're taking the first step towards solving the problem by acknowledging your uncertainty and seeking help.",
+    "You're open to learning and willing to break down the problem into smaller subproblems, which is a great approach."
+  ],
+  "improvements_needed": [
+    "To impr
+2026-01-14 14:09:59,046 - utils.json_parser - ERROR - JSON Error: Extra data: line 21 column 1 (char 1513)
+2026-01-14 14:09:59,047 - agents.EvalAgent - ERROR - Failed to parse feedback: Extra data: line 21 column 1 (char 1513)
+2026-01-14 14:09:59,720 - utils.json_parser - ERROR - Failed to parse JSON. Original response:
+Here are 3 specific code improvements for the given sorting problem:
+
+```json
+[
+  {
+    "change": "Function name should be descriptive",
+    "reason": "The function name 'solution' does not indicate what the function does. It should be renamed to something more descriptive.",
+    "example": "def sor
+2026-01-14 14:09:59,721 - utils.json_parser - ERROR - Cleaned text:
+Here are 3 specific code improvements for the given sorting problem:
+
+```json
+[
+  {
+    "change": "Function name should be descriptive",
+    "reason": "The function name 'solution' does not indicate what the function does. It should be renamed to something more descriptive.",
+    "example": "def sor
+2026-01-14 14:09:59,723 - utils.json_parser - ERROR - JSON Error: Expecting value: line 1 column 1 (char 0)
+2026-01-14 14:37:47,910 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-14 14:37:47,922 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 14:37:47,923 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 14:37:50,604 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 14:37:50,825 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 14:37:53,327 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-14 14:37:53,328 - __main__ - INFO -  Creating web interface...
+2026-01-14 14:37:53,711 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-14 14:37:53,711 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-14 14:41:09,632 - agents.QGenAgent - INFO - Successfully generated problem for Arrays (Medium)
+2026-01-14 14:59:14,847 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-14 14:59:14,858 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 14:59:14,859 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 14:59:16,586 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 14:59:16,628 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 14:59:19,053 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-14 14:59:19,054 - __main__ - INFO -  Creating web interface...
+2026-01-14 14:59:19,452 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-14 14:59:19,453 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-14 15:06:01,365 - __main__ - INFO -  Initializing DSA Tutor AI...
+2026-01-14 15:06:01,369 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 15:06:01,369 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 15:06:02,873 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 15:06:02,913 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 15:06:05,320 - __main__ - INFO -  Tutor system initialized successfully
+2026-01-14 15:06:05,320 - __main__ - INFO -  Creating web interface...
+2026-01-14 15:06:05,725 - __main__ - INFO -  DSA Tutor AI is ready!
+2026-01-14 15:06:05,725 - __main__ - INFO -  Launching web server on http://0.0.0.0:7860
+2026-01-14 15:14:52,826 - agents.QGenAgent - INFO - Successfully generated problem for Arrays (Medium)
+2026-01-14 16:04:58,895 - main - INFO - Initializing DSA Tutor AI...
+2026-01-14 16:04:58,907 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 16:04:58,908 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 16:05:01,673 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 16:05:01,893 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 16:05:04,939 - main - INFO - Tutor system initialized successfully
+2026-01-14 16:05:04,940 - main - INFO - Creating web interface...
+2026-01-14 16:05:05,433 - main - INFO - DSA Tutor AI is ready!
+2026-01-14 16:05:05,434 - main - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-14 16:31:37,291 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-14 16:31:37,301 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 16:31:37,301 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 16:31:39,617 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 16:31:39,786 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 16:31:42,276 - __main__ - INFO - Tutor system initialized successfully
+2026-01-14 16:31:42,277 - __main__ - INFO - Creating web interface...
+2026-01-14 16:31:42,700 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-14 16:31:42,701 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-14 17:09:44,534 - groq._base_client - INFO - Retrying request to /openai/v1/chat/completions in 0.392240 seconds
+2026-01-14 17:13:12,332 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-14 17:13:12,358 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 17:13:12,359 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 17:13:18,975 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 17:13:19,241 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 17:13:28,939 - __main__ - INFO - Tutor system initialized successfully
+2026-01-14 17:13:28,941 - __main__ - INFO - Creating web interface...
+2026-01-14 17:13:30,818 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-14 17:13:30,821 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-14 17:14:21,973 - agents.QGenAgent - INFO - Successfully generated problem for Arrays (Medium)
+2026-01-14 17:19:49,746 - main - INFO - Initializing DSA Tutor AI...
+2026-01-14 17:19:49,786 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 17:19:49,788 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 17:19:55,439 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 17:19:55,555 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 17:20:04,404 - main - INFO - Tutor system initialized successfully
+2026-01-14 17:20:04,407 - main - INFO - Creating web interface...
+2026-01-14 17:20:05,646 - main - INFO - DSA Tutor AI is ready!
+2026-01-14 17:20:05,647 - main - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-14 17:22:56,681 - main - INFO - Initializing DSA Tutor AI...
+2026-01-14 17:22:56,707 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-14 17:22:56,709 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-14 17:22:59,564 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-14 17:22:59,695 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-14 17:23:08,380 - main - INFO - Tutor system initialized successfully
+2026-01-14 17:23:08,381 - main - INFO - Creating web interface...
+2026-01-14 17:23:09,809 - main - INFO - DSA Tutor AI is ready!
+2026-01-14 17:23:09,810 - main - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-14 18:39:18,359 - main - INFO - Initializing DSA Tutor AI...
+2026-01-14 18:39:25,350 - main - INFO - Tutor system initialized successfully
+2026-01-14 18:39:25,351 - main - INFO - Creating web interface...
+2026-01-14 18:39:34,701 - main - INFO - DSA Tutor AI is ready!
+2026-01-14 18:39:34,704 - main - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-14 19:57:34,628 - main - INFO - Initializing database...
+2026-01-14 19:57:34,675 - main - INFO - Database initialized successfully
+2026-01-14 19:57:34,675 - main - INFO - Initializing DSA Tutor AI...
+2026-01-14 19:57:36,375 - main - INFO - Tutor system initialized successfully
+2026-01-14 19:57:36,375 - main - INFO - Creating web interface...
+2026-01-14 19:57:36,682 - main - INFO - DSA Tutor AI is ready!
+2026-01-14 19:57:36,682 - main - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-17 20:30:04,924 - __main__ - INFO - Initializing database...
+2026-01-17 20:30:04,928 - __main__ - INFO - Database initialized successfully
+2026-01-17 20:30:04,928 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-17 20:30:08,736 - __main__ - INFO - Tutor system initialized successfully
+2026-01-17 20:30:08,736 - __main__ - INFO - Creating web interface...
+2026-01-17 20:30:09,212 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-17 20:30:09,213 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-17 20:31:11,606 - root - ERROR - Error starting session: table users has no column named student_id
+2026-01-17 20:31:34,544 - root - ERROR - Error starting session: table users has no column named student_id
+2026-01-17 20:32:47,335 - root - ERROR - Error starting session: table users has no column named student_id
+2026-01-17 20:43:15,030 - __main__ - INFO - Initializing database...
+2026-01-17 20:43:15,032 - __main__ - INFO - Database initialized successfully
+2026-01-17 20:43:15,033 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-17 20:43:16,413 - __main__ - INFO - Tutor system initialized successfully
+2026-01-17 20:43:16,414 - __main__ - INFO - Creating web interface...
+2026-01-17 20:43:16,692 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-17 20:43:16,692 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-17 20:43:38,827 - root - ERROR - Error starting session: table users has no column named student_id
+2026-01-17 20:43:44,223 - root - ERROR - Error starting session: table users has no column named student_id
+2026-01-17 21:19:40,413 - __main__ - INFO - Initializing database...
+2026-01-17 21:19:40,431 - __main__ - INFO - Database initialized successfully
+2026-01-17 21:19:40,432 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-17 21:19:42,085 - __main__ - ERROR - Failed to start DSA Tutor: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+2026-01-17 21:20:23,658 - __main__ - INFO - Initializing database...
+2026-01-17 21:20:23,659 - __main__ - INFO - Database initialized successfully
+2026-01-17 21:20:23,659 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-17 21:20:25,415 - __main__ - INFO - Tutor system initialized successfully
+2026-01-17 21:20:25,415 - __main__ - INFO - Creating web interface...
+2026-01-17 21:20:25,678 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-17 21:20:25,678 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-17 21:22:13,221 - __main__ - INFO - Initializing database...
+2026-01-17 21:22:13,244 - __main__ - INFO - Database initialized successfully
+2026-01-17 21:22:13,244 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-17 21:22:15,982 - __main__ - INFO - Tutor system initialized successfully
+2026-01-17 21:22:15,983 - __main__ - INFO - Creating web interface...
+2026-01-17 21:22:16,424 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-17 21:22:16,425 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-17 21:22:21,710 - __main__ - ERROR - Failed to start DSA Tutor: Cannot find empty port in range: 7860-7860. You can specify a different port by setting the GRADIO_SERVER_PORT environment variable or passing the `server_port` parameter to `launch()`.
+2026-01-17 21:22:39,284 - root - ERROR - Error starting session: name 'Difficulty' is not defined
+2026-01-17 21:22:48,372 - root - ERROR - Error starting session: name 'Difficulty' is not defined
+2026-01-17 21:23:06,434 - root - ERROR - Error starting session: name 'Difficulty' is not defined
+2026-01-17 21:23:12,738 - root - ERROR - Error explaining concept: Knowledge base not available. Please initialize the system first.
+2026-01-17 21:25:10,003 - __main__ - INFO - Initializing database...
+2026-01-17 21:25:10,008 - __main__ - INFO - Database initialized successfully
+2026-01-17 21:25:10,009 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-17 21:25:11,708 - __main__ - INFO - Tutor system initialized successfully
+2026-01-17 21:25:11,708 - __main__ - INFO - Creating web interface...
+2026-01-17 21:25:12,008 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-17 21:25:12,011 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-17 21:30:03,661 - __main__ - INFO - Initializing database...
+2026-01-17 21:30:03,675 - __main__ - INFO - Database initialized successfully
+2026-01-17 21:30:03,675 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-17 21:30:05,087 - __main__ - INFO - Tutor system initialized successfully
+2026-01-17 21:30:05,087 - __main__ - INFO - Creating web interface...
+2026-01-17 21:30:05,318 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-17 21:30:05,318 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-18 14:28:30,038 - __main__ - INFO - Initializing database...
+2026-01-18 14:28:30,059 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:28:30,059 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:28:31,705 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:28:31,705 - __main__ - INFO - Creating web interface...
+2026-01-18 14:28:32,064 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:28:32,065 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-18 14:28:37,267 - __main__ - ERROR - Failed to start DSA Tutor: Cannot find empty port in range: 7860-7860. You can specify a different port by setting the GRADIO_SERVER_PORT environment variable or passing the `server_port` parameter to `launch()`.
+2026-01-18 14:29:32,684 - __main__ - INFO - Initializing database...
+2026-01-18 14:29:32,689 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:29:32,690 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:29:35,487 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:29:35,488 - __main__ - INFO - Creating web interface...
+2026-01-18 14:29:36,108 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:29:36,108 - __main__ - INFO - Launching web server on http://0.0.0.0:7860
+2026-01-18 14:29:41,441 - __main__ - ERROR - Failed to start DSA Tutor: Cannot find empty port in range: 7860-7860. You can specify a different port by setting the GRADIO_SERVER_PORT environment variable or passing the `server_port` parameter to `launch()`.
+2026-01-18 14:30:24,071 - __main__ - INFO - Initializing database...
+2026-01-18 14:30:24,095 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:30:24,097 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:30:26,799 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:30:26,800 - __main__ - INFO - Creating web interface...
+2026-01-18 14:30:27,422 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:30:27,422 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 14:31:44,635 - root - ERROR - Error starting session: name 'Difficulty' is not defined
+2026-01-18 14:34:04,024 - __main__ - INFO - Initializing database...
+2026-01-18 14:34:04,035 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:34:04,035 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:34:06,621 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:34:06,621 - __main__ - INFO - Creating web interface...
+2026-01-18 14:34:07,065 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:34:07,065 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 14:34:41,365 - root - ERROR - Error starting session: name 'Topic' is not defined
+2026-01-18 14:34:46,334 - root - ERROR - Error starting session: name 'Topic' is not defined
+2026-01-18 14:36:40,932 - __main__ - INFO - Initializing database...
+2026-01-18 14:36:40,934 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:36:40,934 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:36:43,263 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:36:43,263 - __main__ - INFO - Creating web interface...
+2026-01-18 14:36:43,702 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:36:43,703 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 14:37:02,169 - root - ERROR - Error starting session: Knowledge base not available. Please initialize the system first.
+2026-01-18 14:37:04,363 - root - ERROR - Error starting session: Knowledge base not available. Please initialize the system first.
+2026-01-18 14:38:41,079 - __main__ - INFO - Initializing database...
+2026-01-18 14:38:41,081 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:38:41,081 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:38:45,730 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:38:45,732 - __main__ - INFO - Creating web interface...
+2026-01-18 14:38:47,166 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:38:47,169 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 14:39:04,125 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-18 14:39:04,132 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-18 14:39:11,257 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-18 14:39:11,554 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-18 14:39:11,687 - root - ERROR - Error starting session: Knowledge base not available. Please initialize the system first.
+2026-01-18 14:41:52,137 - __main__ - INFO - Initializing database...
+2026-01-18 14:41:52,159 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:41:52,160 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:41:56,470 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:41:56,471 - __main__ - INFO - Creating web interface...
+2026-01-18 14:41:56,937 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:41:56,937 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 14:42:24,571 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-18 14:42:24,573 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-18 14:42:28,954 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-18 14:42:29,258 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-18 14:42:29,324 - root - ERROR - Error starting session: Knowledge base not available. Please initialize the system first.
+2026-01-18 14:42:51,421 - root - ERROR - Error explaining concept: Knowledge base not available. Please initialize the system first.
+2026-01-18 14:44:46,184 - __main__ - INFO - Initializing database...
+2026-01-18 14:44:46,186 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:44:46,186 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:44:48,480 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:44:48,481 - __main__ - INFO - Creating web interface...
+2026-01-18 14:44:48,886 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:44:48,886 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 14:49:46,377 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-18 14:49:46,380 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-18 14:49:52,022 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-18 14:49:52,300 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-18 14:50:33,921 - root - ERROR - Error generating problem: name 'Difficulty' is not defined
+2026-01-18 14:50:35,422 - root - ERROR - Error generating problem: name 'Difficulty' is not defined
+2026-01-18 14:53:05,097 - __main__ - INFO - Initializing database...
+2026-01-18 14:53:05,099 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:53:05,099 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:53:07,340 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:53:07,341 - __main__ - INFO - Creating web interface...
+2026-01-18 14:53:07,768 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:53:07,768 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 14:54:19,079 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-18 14:54:19,082 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-18 14:54:24,915 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-18 14:54:25,022 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-18 14:55:19,418 - agents.QGenAgent - INFO - Successfully generated problem for Arrays (Medium)
+2026-01-18 14:56:34,350 - root - ERROR - Error evaluating solution: DatabaseManager.record_question_attempt() got an unexpected keyword argument 'student_id'
+2026-01-18 14:56:49,091 - root - ERROR - Error evaluating solution: DatabaseManager.record_question_attempt() got an unexpected keyword argument 'student_id'
+2026-01-18 14:59:32,026 - __main__ - INFO - Initializing database...
+2026-01-18 14:59:32,028 - __main__ - INFO - Database initialized successfully
+2026-01-18 14:59:32,028 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 14:59:34,313 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 14:59:34,313 - __main__ - INFO - Creating web interface...
+2026-01-18 14:59:34,711 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 14:59:34,711 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 15:01:41,217 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-18 15:01:41,220 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-18 15:01:45,776 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-18 15:01:45,888 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-18 15:02:11,330 - agents.QGenAgent - INFO - Successfully generated problem for Arrays (Medium)
+2026-01-18 15:03:10,559 - utils.json_parser - ERROR - Failed to parse JSON. Original response:
+{
+  "test_results": {
+    "approach_correct": false,
+    "edge_cases_handled": [],
+    "time_complexity": "O(n)",
+    "space_complexity": "O(1)",
+    "potential_bugs": ["Incorrect logic for finding maximum sum", "Array 'arrayA' is empty"]
+  },
+  "feedback": {
+    "positives": [],
+    "improvements_needed": ["Implement a dynamic programming approach to find the maximum sum of a subarray with no consecutive elements"],
+    "concept_gaps": ["Understanding of dynamic programming and its application 
+2026-01-18 15:03:10,561 - utils.json_parser - ERROR - Cleaned text:
+{
+  "test_results": {
+    "approach_correct": false,
+    "edge_cases_handled": [],
+    "time_complexity": "O(n)",
+    "space_complexity": "O(1)",
+    "potential_bugs": ["Incorrect logic for finding maximum sum", "Array 'arrayA' is empty"]
+  },
+  "feedback": {
+    "positives": [],
+    "improvements_needed": ["Implement a dynamic programming approach to find the maximum sum of a subarray with no consecutive elements"],
+    "concept_gaps": ["Understanding of dynamic programming and its application 
+2026-01-18 15:03:10,562 - utils.json_parser - ERROR - JSON Error: Invalid control character at: line 20 column 28 (char 1051)
+2026-01-18 15:03:10,563 - agents.EvalAgent - ERROR - Failed to parse comprehensive evaluation: Invalid control character at: line 20 column 28 (char 1051)
+2026-01-18 15:03:36,536 - root - WARNING - Creating dummy user for student_001 - use register_user instead
+2026-01-18 15:03:36,547 - root - WARNING - Creating dummy user for student_001 - use register_user instead
+2026-01-18 15:18:08,360 - __main__ - INFO - Initializing database...
+2026-01-18 15:18:08,379 - __main__ - INFO - Database initialized successfully
+2026-01-18 15:18:08,380 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 15:18:10,923 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 15:18:10,924 - __main__ - INFO - Creating web interface...
+2026-01-18 15:18:11,382 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 15:18:11,382 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 15:18:55,245 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-18 15:18:55,250 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-18 15:19:01,704 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-18 15:19:01,906 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-18 15:19:50,702 - agents.QGenAgent - INFO - Successfully generated problem for Arrays (Medium)
+2026-01-18 15:20:00,424 - utils.json_parser - ERROR - Failed to parse JSON. Original response:
+{
+  "test_results": {
+    "approach_correct": false,
+    "edge_cases_handled": [],
+    "time_complexity": "O(n^2)",
+    "space_complexity": "O(n)",
+    "potential_bugs": ["Incorrect time complexity", "No handling for edge cases"]
+  },
+  "feedback": {
+    "positives": [],
+    "improvements_needed": ["Implement a correct solution", "Add handling for edge cases"],
+    "concept_gaps": ["Understanding of dynamic programming", "Knowledge of subarray sum problems"],
+    "specific_suggestions": ["Use a 
+2026-01-18 15:20:00,428 - utils.json_parser - ERROR - Cleaned text:
+{
+  "test_results": {
+    "approach_correct": false,
+    "edge_cases_handled": [],
+    "time_complexity": "O(n^2)",
+    "space_complexity": "O(n)",
+    "potential_bugs": ["Incorrect time complexity", "No handling for edge cases"]
+  },
+  "feedback": {
+    "positives": [],
+    "improvements_needed": ["Implement a correct solution", "Add handling for edge cases"],
+    "concept_gaps": ["Understanding of dynamic programming", "Knowledge of subarray sum problems"],
+    "specific_suggestions": ["Use a 
+2026-01-18 15:20:00,430 - utils.json_parser - ERROR - JSON Error: Invalid control character at: line 20 column 28 (char 871)
+2026-01-18 15:20:00,432 - agents.EvalAgent - ERROR - Failed to parse comprehensive evaluation: Invalid control character at: line 20 column 28 (char 871)
+2026-01-18 15:25:19,936 - root - WARNING - Creating dummy user for student_001 - use register_user instead
+2026-01-18 15:25:19,946 - root - WARNING - Creating dummy user for student_001 - use register_user instead
+2026-01-18 15:32:37,252 - __main__ - INFO - Initializing database...
+2026-01-18 15:32:37,254 - __main__ - INFO - Database initialized successfully
+2026-01-18 15:32:37,254 - __main__ - INFO - Initializing DSA Tutor AI...
+2026-01-18 15:32:39,475 - __main__ - INFO - Tutor system initialized successfully
+2026-01-18 15:32:39,475 - __main__ - INFO - Creating web interface...
+2026-01-18 15:32:39,890 - __main__ - INFO - DSA Tutor AI is ready!
+2026-01-18 15:32:39,890 - __main__ - INFO - Launching web server on http://0.0.0.0:7861
+2026-01-18 15:33:30,759 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2026-01-18 15:33:30,763 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-01-18 15:33:36,782 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-01-18 15:33:37,049 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2026-01-18 15:34:18,419 - agents.QGenAgent - INFO - Successfully generated problem for Arrays (Medium)

@@ -1,22 +1,28 @@
 # ================================
 # AGENT 2: QUESTION GENERATOR AGENT
 # ================================
-from knowledge_base import DSAKnowledgeBase, Difficulty
+# Defer knowledge_base import to avoid slow transformers loading
+# from knowledge_base import DSAKnowledgeBase, Difficulty
 from langchain_groq import ChatGroq
 from typing import Dict, List
 import uuid
 from datetime import datetime
 import json
+import logging
 # from langchain.schema import HumanMessage
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from utils.json_parser import extract_json, validate_response_structure
+
+logger = logging.getLogger(__name__)
 
 
 class QuestionGeneratorAgent:
     """Generates personalized practice questions"""
     
-    def __init__(self, knowledge_base: DSAKnowledgeBase):
+    def __init__(self, knowledge_base=None):
         self.kb = knowledge_base
-        self.llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.8)
+        # Lower temperature for more consistent JSON output (was 0.8, now 0.4)
+        self.llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.4)
         self.problem_templates = self._load_problem_templates()
     
     def _load_problem_templates(self) -> Dict:
@@ -48,11 +54,16 @@ class QuestionGeneratorAgent:
             }
         }
     
-    def generate_question(self, topic: str, difficulty: Difficulty,
+    def generate_question(self, topic: str, difficulty,  # Can be Difficulty enum or str
                          student_weakness: List[str] = None) -> Dict:
         """Generate a new practice question"""
-        # Get relevant knowledge
-        docs = self.kb.query(f"{difficulty.value} problem about {topic}", topic)
+        # Get relevant knowledge (lazy load if needed)
+        if self.kb is None:
+            raise ValueError("Knowledge base not available. Please initialize the system first.")
+        
+        # Handle both enum and string difficulty
+        diff_value = difficulty.value if hasattr(difficulty, 'value') else str(difficulty)
+        docs = self.kb.query(f"{diff_value} problem about {topic}", topic)
         
         # Generate question using LLM
         weakness_context = ""
@@ -60,7 +71,7 @@ class QuestionGeneratorAgent:
             weakness_context = f"\nFocus on these student weaknesses: {', '.join(student_weakness)}"
         
         prompt = f"""
-        Generate a {difficulty.value} difficulty DSA problem about {topic}.
+        Generate a {diff_value} difficulty DSA problem about {topic}.
         
         Context from knowledge base:
         {docs[0].page_content[:1000] if docs else 'General DSA problem'}
@@ -70,23 +81,24 @@ class QuestionGeneratorAgent:
         2. Include input/output format
         3. Provide 2-3 sample test cases with explanations
         4. Specify constraints
-        5. Make it appropriate for {difficulty.value} level
+        5. Make it appropriate for {diff_value} level
         {weakness_context}
         
-        Format the response as JSON with keys:
-        - title: Problem title
-        - description: Detailed problem statement
-        - input_format: How input is provided
-        - output_format: Expected output
-        - constraints: Time/space limits, input ranges
-        - examples: List of example inputs/outputs with explanations
-        - hints: 2-3 hints for solving
+        IMPORTANT: Return ONLY valid JSON with no markdown, no explanations, no extra text.
+        Format: {{"title": "...", "description": "...", "input_format": "...", "output_format": "...", "constraints": "...", "examples": [...], "hints": [...]}}
         """
         
         response = self.llm.invoke([HumanMessage(content=prompt)])
         
         try:
-            problem = json.loads(response.content)
+            # Use helper to extract JSON from markdown-wrapped responses
+            problem = extract_json(response.content)
+            
+            # Validate required fields
+            required = ["title", "description", "examples", "hints"]
+            if not validate_response_structure(problem, required):
+                logger.warning(f"Response missing required fields for {topic}")
+                return self._create_fallback_problem(topic, difficulty, response.content)
             
             # Add metadata
             problem["topic"] = topic
@@ -94,12 +106,15 @@ class QuestionGeneratorAgent:
             problem["generated_at"] = datetime.now().isoformat()
             problem["id"] = f"gen_{hash(str(problem)) % 10000:04d}"
             
+            logger.info(f"Successfully generated problem for {topic} ({difficulty.value})")
             return problem
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
             # Fallback to structured generation
+            logger.error(f"Failed to parse problem generation response: {e}")
+            logger.debug(f"Raw response: {response.content[:500]}")
             return self._create_fallback_problem(topic, difficulty, response.content)
     
-    def _create_fallback_problem(self, topic: str, difficulty: Difficulty, 
+    def _create_fallback_problem(self, topic: str, difficulty,  # Can be Difficulty enum or str
                                 content: str) -> Dict:
         """Create problem from unstructured LLM output"""
         return {

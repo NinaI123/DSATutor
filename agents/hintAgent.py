@@ -8,7 +8,7 @@ class HintAgent:
     """Provides intelligent, progressive hints"""
     
     def __init__(self):
-        self.llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.3)
+        self.llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.4)
         self.hint_history = {}  # problem_id -> hint_level
     
     def get_progressive_hints(self, problem: Dict, student_code: str = None,

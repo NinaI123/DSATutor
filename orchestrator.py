@@ -3,36 +3,66 @@ from agents.teacherAgent import TeacherAgent
 from agents.QGenAgent import QuestionGeneratorAgent
 from agents.hintAgent import HintAgent
 from agents.EvalAgent import EvaluatorAgent
-from knowledge_base import DSAKnowledgeBase, Topic
+# Defer knowledge_base import to avoid slow transformers loading
+# from knowledge_base import DSAKnowledgeBase, Topic
 import gradio as gr
 from typing import Dict, List
-from knowledge_base import Difficulty
+# from knowledge_base import Difficulty
 from datetime import datetime
 
 class DSATutorSystem:
     """Main orchestrator for all agents"""
     
     def __init__(self, api_key: str = None):
+        # Set API key FIRST before initializing any agents
         if api_key:
             import os
             os.environ["GROQ_API_KEY"] = api_key
-        self.knowledge_base = DSAKnowledgeBase()
-        self.teacher = TeacherAgent(self.knowledge_base)
-        self.question_generator = QuestionGeneratorAgent(self.knowledge_base)
+        
+        # Defer heavy knowledge base loading
+        self._knowledge_base = None
+        
+        # Initialize lightweight agents first
+        self.teacher = TeacherAgent()
+        self.question_generator = QuestionGeneratorAgent()
         self.hint_agent = HintAgent()
         self.evaluator = EvaluatorAgent()
         self.current_student = None
         self.session_history = []
         
-    def start_learning_session(self, student_id: str, topics: List[str], 
+        
+        print("[INFO] DSA Tutor System initialized (knowledge base will load on first use)")
+    
+    @property
+    def knowledge_base(self):
+        """Lazy load knowledge base only when needed"""
+        if self._knowledge_base is None:
+            print("Loading knowledge base...")
+            # Import here to avoid slow startup
+            from knowledge_base import DSAKnowledgeBase
+            self._knowledge_base = DSAKnowledgeBase()
+            # Update agents that need the knowledge base
+            self.teacher.kb = self._knowledge_base
+            self.question_generator.kb = self._knowledge_base
+            # Evaluator and Hint agent might not need KB directly or use different init
+            # Check if they have kb attribute if needed, but Teacher/QGen are main ones failing
+        return self._knowledge_base
+        
+    def start_learning_session(self, username: str, topics: List[str], 
                               difficulty: str = "Easy") -> Dict:
         """Start new learning session"""
+        # Import locally to avoid circular dependencies
+        from knowledge_base import Difficulty
+        
+        # Ensure knowledge base is loaded
+        _ = self.knowledge_base
+        
         difficulty_enum = Difficulty(difficulty)
         session_info = self.teacher.start_teaching_session(
-            student_id, topics, difficulty_enum
+            username, topics, difficulty_enum
         )
         
-        self.current_student = student_id
+        self.current_student = username
         self.session_history.append({
             "session_id": session_info["session_id"],
             "start_time": datetime.now(),
@@ -45,11 +75,19 @@ class DSATutorSystem:
     def get_concept_explanation(self, concept: str, topic: str, 
                                student_level: str = "beginner") -> Dict:
         """Get explanation of a concept"""
+        # Ensure knowledge base is loaded
+        _ = self.knowledge_base
         return self.teacher.explain_concept(concept, topic, student_level)
     
     def generate_practice_question(self, topic: str, difficulty: str = "Medium",
                                  weakness: List[str] = None) -> Dict:
         """Generate practice question"""
+        # Ensure knowledge base is loaded
+        _ = self.knowledge_base
+        
+        # Import locally to avoid circular dependencies
+        from knowledge_base import Difficulty
+        
         difficulty_enum = Difficulty(difficulty)
         return self.question_generator.generate_question(
             topic, difficulty_enum, weakness
@@ -58,6 +96,9 @@ class DSATutorSystem:
     def get_hint(self, problem: Dict, hint_level: int = 0,
                 student_info: Dict = None) -> Dict:
         """Get hint for problem"""
+        """Get hint for problem"""
+        # Ensure knowledge base is loaded
+        _ = self.knowledge_base
         student_code = student_info.get("code") if student_info else None
         student_approach = student_info.get("approach") if student_info else None
         
@@ -68,11 +109,15 @@ class DSATutorSystem:
     def evaluate_solution(self, problem: Dict, student_code: str,
                          explanation: str = None) -> Dict:
         """Evaluate student solution"""
+        # Ensure knowledge base is loaded
+        _ = self.knowledge_base
         return self.evaluator.evaluate_solution(problem, student_code, explanation)
     
     def generate_learning_path(self, topics: List[str], 
                               current_skill: str = "beginner") -> List[Dict]:
         """Generate personalized learning path"""
+        # Ensure knowledge base is loaded
+        _ = self.knowledge_base
         learning_path = []
         
         for topic in topics:

@@ -12,6 +12,7 @@ chromadb
 pydantic
 python-Levenshtein
 numpy
+bcrypt
 
 # # langchain
 # # langchain-groq

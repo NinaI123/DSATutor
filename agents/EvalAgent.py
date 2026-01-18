@@ -6,28 +6,49 @@ from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from typing import Dict, List
 import json
+import logging
+from utils.json_parser import extract_json
+
+logger = logging.getLogger(__name__)
 class EvaluatorAgent:
     """Evaluates student solutions and provides feedback"""
     
     def __init__(self):
-        self.llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.1)
+        self.llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.4)
+        # Simple in-memory cache for LLM responses
+        self._response_cache = {}
+        self._cache_max_size = 50
+    
+    def _get_cached_response(self, cache_key: str, prompt: str):
+        """Get cached response or make new LLM call"""
+        if cache_key in self._response_cache:
+            return self._response_cache[cache_key]
+        
+        response = self.llm.invoke([HumanMessage(content=prompt)])
+        
+        # Cache the response
+        if len(self._response_cache) < self._cache_max_size:
+            self._response_cache[cache_key] = response
+        
+        return response
     
     def evaluate_solution(self, problem: Dict, student_code: str,
                          student_explanation: str = None) -> Dict:
-        """Comprehensive evaluation of student solution"""
+        """Comprehensive evaluation of student solution - optimized single LLM call"""
         
-        # Run basic checks
+        # Run basic checks (fast, no API call)
         syntax_check = self._check_syntax(student_code)
-        test_results = self._run_conceptual_tests(problem, student_code)
         
-        # Generate detailed feedback
-        feedback = self._generate_feedback(problem, student_code, student_explanation, test_results)
+        # Single comprehensive LLM evaluation
+        evaluation_result = self._comprehensive_evaluation(problem, student_code, student_explanation)
+        
+        # Extract components from the single response
+        test_results = evaluation_result.get("test_results", {})
+        feedback = evaluation_result.get("feedback", {})
+        improvements = evaluation_result.get("improvements", [])
         
         # Calculate score
         score = self._calculate_score(syntax_check, test_results, feedback)
-        
-        # Suggest improvements
-        improvements = self._suggest_improvements(student_code, problem, feedback)
         
         return {
             "score": score,
@@ -38,6 +59,82 @@ class EvaluatorAgent:
             "correctness": score >= 70,
             "next_steps": self._recommend_next_steps(score, feedback)
         }
+    
+    def _comprehensive_evaluation(self, problem: Dict, code: str, explanation: str = None) -> Dict:
+        """Single comprehensive LLM evaluation combining all analysis"""
+        prompt = f"""
+        Analyze this student's solution comprehensively. Return ONLY valid JSON.
+
+        Problem: {problem.get('title')}
+        Description: {problem.get('description', '')}
+        
+        Sample test cases: {json.dumps(problem.get('examples', []), indent=2)}
+        
+        Student Code:
+        ```python
+        {code}
+        ```
+        
+        Student Explanation: {explanation or 'No explanation provided'}
+        
+        Provide a complete evaluation in this exact JSON format:
+        {{
+          "reasoning": "Briefly explain your thought process here (this helps accuracy)",
+          "test_results": {{
+            "approach_correct": true/false,
+            "edge_cases_handled": ["case1", "case2"],
+            "time_complexity": "O(n)",
+            "space_complexity": "O(1)",
+            "potential_bugs": ["bug1", "bug2"]
+          }},
+          "feedback": {{
+            "positives": ["positive1", "positive2"],
+            "improvements_needed": ["improvement1", "improvement2"],
+            "concept_gaps": ["gap1", "gap2"],
+            "specific_suggestions": ["suggestion1", "suggestion2"]
+          }},
+          "improvements": [
+            {{
+              "type": "code",
+              "change": "what to change",
+              "reason": "why to change",
+              "example": "code example"
+            }}
+          ]
+        }}
+        
+        CRITICAL: 
+        1. Parse the student code carefully.
+        2. Be specific, not generic. Cite line numbers if possible.
+        3. Return ONLY valid JSON.
+        4. Do NOT use newlines/control characters inside JSON strings. Use \\n for line breaks.
+        """
+        
+        # Create cache key based on problem and code (ignore explanation for caching)
+        cache_key = f"{hash(problem.get('title', '') + code[:100])}"
+        response = self._get_cached_response(cache_key, prompt)
+        
+        try:
+            return extract_json(response.content)
+        except Exception as e:
+            logger.error(f"Failed to parse comprehensive evaluation: {e}")
+            logger.debug(f"Raw response: {response.content[:300]}")
+            return {
+                "test_results": {
+                    "approach_correct": False,
+                    "edge_cases_handled": [],
+                    "time_complexity": "Unknown",
+                    "space_complexity": "Unknown",
+                    "potential_bugs": ["Could not parse evaluation"]
+                },
+                "feedback": {
+                    "positives": ["Attempted to solve the problem"],
+                    "improvements_needed": ["Code needs more work"],
+                    "concept_gaps": [],
+                    "specific_suggestions": ["Review the problem requirements"]
+                },
+                "improvements": []
+            }
     
     def _check_syntax(self, code: str) -> Dict:
         """Basic syntax and style checking"""
@@ -84,15 +181,17 @@ class EvaluatorAgent:
         3. What's the time/space complexity?
         4. Any obvious bugs or inefficiencies?
         
-        Return as JSON with: approach_correct (bool), edge_cases_handled (list), 
-        time_complexity (str), space_complexity (str), potential_bugs (list).
+        IMPORTANT: Return ONLY valid JSON with no markdown, no explanations, no extra text.
+        Format: {{"approach_correct": true/false, "edge_cases_handled": [...], "time_complexity": "O(n)", "space_complexity": "O(1)", "potential_bugs": [...]}}
         """
         
         response = self.llm.invoke([HumanMessage(content=prompt)])
         
         try:
-            return json.loads(response.content)
-        except:
+            return extract_json(response.content)
+        except Exception as e:
+            logger.error(f"Failed to parse test results: {e}")
+            logger.debug(f"Raw response: {response.content[:300]}")
             return {
                 "approach_correct": False,
                 "edge_cases_handled": [],
@@ -123,15 +222,17 @@ class EvaluatorAgent:
         4. Explains concepts that were misunderstood
         5. Suggests concrete next steps
         
-        Format as JSON with: positives (list), improvements_needed (list), 
-        concept_gaps (list), specific_suggestions (list).
+        IMPORTANT: Return ONLY valid JSON with no markdown, no explanations, no extra text.
+        Format: {{"positives": [...], "improvements_needed": [...], "concept_gaps": [...], "specific_suggestions": [...]}}
         """
         
         response = self.llm.invoke([HumanMessage(content=prompt)])
         
         try:
-            return json.loads(response.content)
-        except:
+            return extract_json(response.content)
+        except Exception as e:
+            logger.error(f"Failed to parse feedback: {e}")
+            logger.debug(f"Raw response: {response.content[:300]}")
             return {
                 "positives": ["Attempted to solve the problem"],
                 "improvements_needed": ["Code needs more work"],
@@ -194,18 +295,19 @@ class EvaluatorAgent:
         2. Why to change it
         3. Example of better code
         
-        Return as JSON list with: change, reason, example.
+        IMPORTANT: Return ONLY valid JSON array with no markdown, no explanations, no extra text.
+        Format: [{{"change": "...", "reason": "...", "example": "..."}}, ...]
         """
         
         response = self.llm.invoke([HumanMessage(content=prompt)])
         
         try:
-            code_suggestions = json.loads(response.content)
+            code_suggestions = extract_json(response.content)
             suggestions.extend([
                 {"type": "code", **sugg} for sugg in code_suggestions
             ])
-        except:
-            pass
+        except Exception as e:
+            logger.debug(f"Could not parse code suggestions: {e}")
         
         return suggestions[:5]  # Limit to 5 suggestions
     
@@ -262,8 +364,9 @@ class EvaluatorAgent:
         response = self.llm.invoke([HumanMessage(content=prompt)])
         
         try:
-            return json.loads(response.content)
-        except:
+            return extract_json(response.content)
+        except Exception as e:
+            logger.error(f"Failed to parse comparison: {e}")
             return {
                 "differences": ["Could not parse comparison"],
                 "efficiency_analysis": "Unknown",
